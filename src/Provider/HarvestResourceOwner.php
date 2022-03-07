@@ -24,10 +24,11 @@ class HarvestResourceOwner implements ResourceOwnerInterface
 
   public function getId()
   {
+    $this->getValueByKey($this->response, 'user.id');
   }
   public function getEmail()
   {
-    return;
+    return $this->getValueByKey($this->response, 'user.email');
   }
 
   public function toArray()

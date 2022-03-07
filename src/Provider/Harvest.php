@@ -8,7 +8,7 @@ use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 use Sumaerjolly\OAuth2\Client\Provider\HarvestResourceOwner;
 
-class Helpscout extends AbstractProvider
+class Harvest extends AbstractProvider
 {
   const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'id';
 
@@ -30,17 +30,17 @@ class Helpscout extends AbstractProvider
 
   public function getBaseAuthorizationUrl()
   {
-    return 'https://secure.helpscout.net/authentication/authorizeClientApplication';
+    return 'https://id.getharvest.com/oauth2/authorize';
   }
 
   public function getBaseAccessTokenUrl(array $params)
   {
-    return 'https://api.helpscout.net/v2/oauth2/token';
+    return 'https://id.getharvest.com/api/v2/oauth2/token';
   }
 
   public function getResourceOwnerDetailsUrl(AccessToken $token)
   {
-    return 'https://api.helpscout.net/v2/users/me';
+    return 'https://id.getharvest.com/api/v2/accounts';
   }
 
   public function getDefaultScopes()
@@ -59,6 +59,6 @@ class Helpscout extends AbstractProvider
 
   protected function createResourceOwner(array $response, AccessToken $token)
   {
-    return new HelpscoutUser($response);
+    return new HarvestResourceOwner($response);
   }
 }
